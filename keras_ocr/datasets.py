@@ -118,7 +118,7 @@ def get_born_digital_recognizer_dataset(split='train', cache_dir=None):
     main_dir = os.path.join(cache_dir, 'borndigital')
     assert split in ['train', 'traintest', 'test'], f'Unsupported split: {split}'
     if split in ['train', 'traintest']:
-        train_dir = os.path.join(main_dir + '/train', 'data')
+        train_dir = os.path.join(main_dir, 'train', 'data')
         training_zip_path = tools.download_and_verify(
             url='https://github.com/Djvnit/keras-ocr/raw/master/data.zip',  # pylint: disable=line-too-long
             filename='Challenge1_Training_Task3_Images_GT.zip',
