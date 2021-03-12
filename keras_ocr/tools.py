@@ -15,7 +15,7 @@ from shapely import geometry
 from scipy import spatial
 
 
-def read(filepath_or_buffer: typing.Union[str, io.BytesIO]):
+[docs]def read(filepath_or_buffer: typing.Union[str, io.BytesIO]):
     """Read a file into an image object
 
     Args:
@@ -36,7 +36,8 @@ def read(filepath_or_buffer: typing.Union[str, io.BytesIO]):
     return cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 
-def get_rotated_width_height(box):
+
+[docs]def get_rotated_width_height(box):
     """
     Returns the width and height of a rotated rectangle
 
@@ -51,8 +52,9 @@ def get_rotated_width_height(box):
     return int(w[0][0]), int(h[0][0])
 
 
+
 # pylint:disable=too-many-locals
-def warpBox(image,
+[docs]def warpBox(image,
             box,
             target_height=None,
             target_width=None,
@@ -100,11 +102,12 @@ def warpBox(image,
     return full
 
 
+
 def flatten(list_of_lists):
     return [item for sublist in list_of_lists for item in sublist]
 
 
-def combine_line(line):
+[docs]def combine_line(line):
     """Combine a set of boxes in a line into a single bounding
     box.
 
@@ -127,7 +130,8 @@ def combine_line(line):
     return box, text
 
 
-def drawAnnotations(image, predictions, ax=None):
+
+[docs]def drawAnnotations(image, predictions, ax=None):
     """Draw text annotations onto image.
 
     Args:
@@ -167,7 +171,8 @@ def drawAnnotations(image, predictions, ax=None):
     return ax
 
 
-def drawBoxes(image, boxes, color=(255, 0, 0), thickness=5, boxes_format='boxes'):
+
+[docs]def drawBoxes(image, boxes, color=(255, 0, 0), thickness=5, boxes_format='boxes'):
     """Draw boxes onto an image.
 
     Args:
@@ -208,7 +213,8 @@ def drawBoxes(image, boxes, color=(255, 0, 0), thickness=5, boxes_format='boxes'
     return canvas
 
 
-def adjust_boxes(boxes, boxes_format='boxes', scale=1):
+
+[docs]def adjust_boxes(boxes, boxes_format='boxes', scale=1):
     """Adjust boxes using a given scale and offset.
 
     Args:
@@ -228,7 +234,8 @@ def adjust_boxes(boxes, boxes_format='boxes', scale=1):
     raise NotImplementedError(f'Unsupported boxes format: {boxes_format}')
 
 
-def augment(boxes,
+
+[docs]def augment(boxes,
             augmenter: imgaug.augmenters.meta.Augmenter,
             image=None,
             boxes_format='boxes',
@@ -301,7 +308,8 @@ def augment(boxes,
     return image_augmented, boxes_augmented
 
 
-def pad(image, width: int, height: int, cval: int = 255):
+
+[docs]def pad(image, width: int, height: int, cval: int = 255):
     """Pad an image to a desired size. Raises an exception if image
     is larger than desired size.
 
@@ -322,7 +330,8 @@ def pad(image, width: int, height: int, cval: int = 255):
     return padded
 
 
-def resize_image(image, max_scale, max_size):
+
+[docs]def resize_image(image, max_scale, max_size):
     """Obtain the optimal resized image subject to a maximum scale
     and maximum size.
 
@@ -341,8 +350,9 @@ def resize_image(image, max_scale, max_size):
                       dsize=(int(image.shape[1] * scale), int(image.shape[0] * scale))), scale
 
 
+
 # pylint: disable=too-many-arguments
-def fit(image, width: int, height: int, cval: int = 255, mode='letterbox', return_scale=False):
+[docs]def fit(image, width: int, height: int, cval: int = 255, mode='letterbox', return_scale=False):
     """Obtain a new image, fit to the specified size.
 
     Args:
@@ -386,7 +396,8 @@ def fit(image, width: int, height: int, cval: int = 255, mode='letterbox', retur
     return fitted, scale
 
 
-def read_and_fit(filepath_or_array: typing.Union[str, np.ndarray],
+
+[docs]def read_and_fit(filepath_or_array: typing.Union[str, np.ndarray],
                  width: int,
                  height: int,
                  cval: int = 255,
@@ -409,7 +420,8 @@ def read_and_fit(filepath_or_array: typing.Union[str, np.ndarray],
     return image
 
 
-def sha256sum(filename):
+
+[docs]def sha256sum(filename):
     """Compute the sha256 hash for a file."""
     h = hashlib.sha256()
     b = bytearray(128 * 1024)
@@ -420,12 +432,13 @@ def sha256sum(filename):
     return h.hexdigest()
 
 
+
 def get_default_cache_dir():
     return os.environ.get('KERAS_OCR_CACHE_DIR', os.path.expanduser(os.path.join('~',
                                                                                  '.keras-ocr')))
 
 
-def download_and_verify(url, sha256=None, cache_dir=None, verbose=True, filename=None):
+[docs]def download_and_verify(url, sha256=None, cache_dir=None, verbose=True, filename=None):
     """Download a file to a cache directory and verify it with a sha256
     hash.
 
@@ -455,7 +468,8 @@ def download_and_verify(url, sha256=None, cache_dir=None, verbose=True, filename
     return filepath
 
 
-def get_rotated_box(
+
+[docs]def get_rotated_box(
     points
 ) -> typing.Tuple[typing.Tuple[float, float], typing.Tuple[float, float], typing.Tuple[
         float, float], typing.Tuple[float, float], float]:
@@ -505,7 +519,8 @@ def get_rotated_box(
     return pts, rotation
 
 
-def fix_line(line):
+
+[docs]def fix_line(line):
     """Given a list of (box, character) tuples, return a revised
     line with a consistent ordering of left-to-right or top-to-bottom,
     with each box provided with (top-left, top-right, bottom-right, bottom-left)
