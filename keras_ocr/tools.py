@@ -15,7 +15,7 @@ from shapely import geometry
 from scipy import spatial
 
 
-[docs]def read(filepath_or_buffer: typing.Union[str, io.BytesIO]):
+def read(filepath_or_buffer: typing.Union[str, io.BytesIO]):
     """Read a file into an image object
 
     Args:
@@ -36,8 +36,7 @@ from scipy import spatial
     return cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 
-
-[docs]def get_rotated_width_height(box):
+def get_rotated_width_height(box):
     """
     Returns the width and height of a rotated rectangle
 
@@ -52,9 +51,8 @@ from scipy import spatial
     return int(w[0][0]), int(h[0][0])
 
 
-
 # pylint:disable=too-many-locals
-[docs]def warpBox(image,
+def warpBox(image,
             box,
             target_height=None,
             target_width=None,
@@ -102,12 +100,11 @@ from scipy import spatial
     return full
 
 
-
 def flatten(list_of_lists):
     return [item for sublist in list_of_lists for item in sublist]
 
 
-[docs]def combine_line(line):
+def combine_line(line):
     """Combine a set of boxes in a line into a single bounding
     box.
 
@@ -130,8 +127,7 @@ def flatten(list_of_lists):
     return box, text
 
 
-
-[docs]def drawAnnotations(image, predictions, ax=None):
+def drawAnnotations(image, predictions, ax=None):
     """Draw text annotations onto image.
 
     Args:
@@ -171,8 +167,7 @@ def flatten(list_of_lists):
     return ax
 
 
-
-[docs]def drawBoxes(image, boxes, color=(255, 0, 0), thickness=5, boxes_format='boxes'):
+def drawBoxes(image, boxes, color=(255, 0, 0), thickness=5, boxes_format='boxes'):
     """Draw boxes onto an image.
 
     Args:
@@ -213,8 +208,7 @@ def flatten(list_of_lists):
     return canvas
 
 
-
-[docs]def adjust_boxes(boxes, boxes_format='boxes', scale=1):
+def adjust_boxes(boxes, boxes_format='boxes', scale=1):
     """Adjust boxes using a given scale and offset.
 
     Args:
@@ -234,8 +228,7 @@ def flatten(list_of_lists):
     raise NotImplementedError(f'Unsupported boxes format: {boxes_format}')
 
 
-
-[docs]def augment(boxes,
+def augment(boxes,
             augmenter: imgaug.augmenters.meta.Augmenter,
             image=None,
             boxes_format='boxes',
@@ -308,8 +301,7 @@ def flatten(list_of_lists):
     return image_augmented, boxes_augmented
 
 
-
-[docs]def pad(image, width: int, height: int, cval: int = 255):
+def pad(image, width: int, height: int, cval: int = 255):
     """Pad an image to a desired size. Raises an exception if image
     is larger than desired size.
 
@@ -330,8 +322,7 @@ def flatten(list_of_lists):
     return padded
 
 
-
-[docs]def resize_image(image, max_scale, max_size):
+def resize_image(image, max_scale, max_size):
     """Obtain the optimal resized image subject to a maximum scale
     and maximum size.
 
@@ -350,9 +341,8 @@ def flatten(list_of_lists):
                       dsize=(int(image.shape[1] * scale), int(image.shape[0] * scale))), scale
 
 
-
 # pylint: disable=too-many-arguments
-[docs]def fit(image, width: int, height: int, cval: int = 255, mode='letterbox', return_scale=False):
+def fit(image, width: int, height: int, cval: int = 255, mode='letterbox', return_scale=False):
     """Obtain a new image, fit to the specified size.
 
     Args:
@@ -396,8 +386,7 @@ def flatten(list_of_lists):
     return fitted, scale
 
 
-
-[docs]def read_and_fit(filepath_or_array: typing.Union[str, np.ndarray],
+def read_and_fit(filepath_or_array: typing.Union[str, np.ndarray],
                  width: int,
                  height: int,
                  cval: int = 255,
@@ -420,8 +409,7 @@ def flatten(list_of_lists):
     return image
 
 
-
-[docs]def sha256sum(filename):
+def sha256sum(filename):
     """Compute the sha256 hash for a file."""
     h = hashlib.sha256()
     b = bytearray(128 * 1024)
@@ -432,13 +420,12 @@ def flatten(list_of_lists):
     return h.hexdigest()
 
 
-
 def get_default_cache_dir():
     return os.environ.get('KERAS_OCR_CACHE_DIR', os.path.expanduser(os.path.join('~',
                                                                                  '.keras-ocr')))
 
 
-[docs]def download_and_verify(url, sha256=None, cache_dir=None, verbose=True, filename=None):
+def download_and_verify(url, sha256=None, cache_dir=None, verbose=True, filename=None):
     """Download a file to a cache directory and verify it with a sha256
     hash.
 
@@ -468,8 +455,7 @@ def get_default_cache_dir():
     return filepath
 
 
-
-[docs]def get_rotated_box(
+def get_rotated_box(
     points
 ) -> typing.Tuple[typing.Tuple[float, float], typing.Tuple[float, float], typing.Tuple[
         float, float], typing.Tuple[float, float], float]:
@@ -519,8 +505,7 @@ def get_default_cache_dir():
     return pts, rotation
 
 
-
-[docs]def fix_line(line):
+def fix_line(line):
     """Given a list of (box, character) tuples, return a revised
     line with a consistent ordering of left-to-right or top-to-bottom,
     with each box provided with (top-left, top-right, bottom-right, bottom-left)
